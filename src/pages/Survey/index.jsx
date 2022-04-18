@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Loader } from "../../utils/styles/Atoms";
 import colors from "../../utils/styles/colors";
-import { SurveyContext } from "../../utils/context";
 
 const SurveyContainer = styled.div`
     display: flex;
