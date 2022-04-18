@@ -1,23 +1,7 @@
+import { useState, useEffect } from "react";
 import Card from "../../components/Card";
 import styled from "styled-components";
-
-const freelanceProfiles = [
-    {
-        name: "Jane Doe",
-        jobTitle: "Devops",
-        picture: "https://picsum.photos/200/301",
-    },
-    {
-        name: "John Doe",
-        jobTitle: "Developpeur frontend",
-        picture: "https://picsum.photos/200/302",
-    },
-    {
-        name: "Jeanne Biche",
-        jobTitle: "Développeuse Fullstack",
-        picture: "https://picsum.photos/200/303",
-    },
-];
+import { Loader } from "../../utils/styles/Atoms";
 
 const HeaderText = styled.div`
     text-align: center;
@@ -43,6 +27,29 @@ const CardsContainer = styled.div`
 `;
 
 function Freelances() {
+    const [freelanceProfils, setFreelanceProfils] = useState([]);
+    const [isDataLoading, setDataLoading] = useState(false);
+    const [error, setError] = useState(false);
+
+    useEffect(() => {
+        setDataLoading(true);
+        async function fetchFreelances() {
+            try {
+                const response = await fetch(
+                    `http://localhost:8000/freelances`
+                );
+                const { freelancersList } = await response.json();
+                setFreelanceProfils(freelancersList);
+            } catch (error) {
+                console.log(error);
+                setError(true);
+            } finally {
+                setDataLoading(false);
+            }
+        }
+        fetchFreelances();
+    }, []);
+
     return (
         <div>
             <HeaderText>
@@ -52,14 +59,18 @@ function Freelances() {
                 </p>
             </HeaderText>
             <CardsContainer>
-                {freelanceProfiles.map((profile, index) => (
-                    <Card
-                        key={`${profile.name}-${index}`}
-                        label={profile.jobTitle}
-                        picture={profile.picture}
-                        title={profile.name}
-                    />
-                ))}
+                {isDataLoading ? (
+                    <Loader />
+                ) : (
+                    freelanceProfils.map((profile, index) => (
+                        <Card
+                            key={`${profile.name}-${index}`}
+                            label={profile.jobTitle}
+                            picture={profile.picture}
+                            title={profile.name}
+                        />
+                    ))
+                )}
             </CardsContainer>
         </div>
     );
