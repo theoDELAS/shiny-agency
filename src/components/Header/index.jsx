@@ -1,41 +1,41 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import colors from "../../utils/styles/colors";
-import logo from "../../utils/assets/dark-logo.png";
+import { StyledLink } from "../../utils/styles/Atoms";
+import LightLogo from "../../utils/assets/light-logo.png";
+import DarkLogo from "../../utils/assets/dark-logo.png";
+import { useTheme } from "../../utils/hooks";
 
-const StyledNav = styled.nav`
+const HomeLogo = styled.img`
+    height: 70px;
+`;
+
+const NavContainer = styled.nav`
+    padding: 30px;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
-`;
-
-const StyledLink = styled(Link)`
-    padding: 15px 25px;
-    color: #8186a0;
-    text-decoration: none;
-    font-size: 18px;
-    ${(props) =>
-        props.$isFullLink &&
-        `color: white; border-radius: 30px; background-color: ${colors.primary};`}
-    ${(props) => props.$isFull && `margin-right: auto`}
-`;
-
-const Logo = styled.img`
-    width: 150px;
 `;
 
 function Header() {
+    const { theme } = useTheme();
+
     return (
-        <StyledNav>
-            <StyledLink $isFull to="/">
-                <Logo src={logo} />
-            </StyledLink>
-            <StyledLink to="/">Accueil</StyledLink>
-            <StyledLink to="/profils">Profils</StyledLink>
-            <StyledLink to="/survey/1" $isFullLink>
-                Faire le test
-            </StyledLink>
-        </StyledNav>
+        <NavContainer>
+            <Link to="/">
+                <HomeLogo src={theme === "light" ? DarkLogo : LightLogo} />
+            </Link>
+            <div>
+                <StyledLink $theme={theme} to="/">
+                    Accueil
+                </StyledLink>
+                <StyledLink $theme={theme} to="/freelances">
+                    Profils
+                </StyledLink>
+                <StyledLink to="/survey/1" $isFullLink>
+                    Faire le test
+                </StyledLink>
+            </div>
+        </NavContainer>
     );
 }
 

@@ -28,7 +28,7 @@ ReactDOM.render(
                         <Route path="/results">
                             <Results />
                         </Route>
-                        <Route path="/profils">
+                        <Route path="/freelances">
                             <Freelances />
                         </Route>
                         <Route>
