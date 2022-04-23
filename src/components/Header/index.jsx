@@ -38,7 +38,7 @@ function Header() {
                 <StyledLink $theme={theme} to="/freelances">
                     Profils
                 </StyledLink>
-                <StyledLink to="/survey/1" $isFullLink>
+                <StyledLink $theme={theme} to="/survey/1" $isFullLink>
                     Faire le test
                 </StyledLink>
                 <ToggleButton />
