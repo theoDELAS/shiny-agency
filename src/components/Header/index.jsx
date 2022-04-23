@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { StyledLink } from "../../utils/styles/Atoms";
@@ -42,9 +41,7 @@ function Header() {
                 <StyledLink to="/survey/1" $isFullLink>
                     Faire le test
                 </StyledLink>
-                <StyledLink>
-                    <ToggleButton />
-                </StyledLink>
+                <ToggleButton />
             </RigthButtonsContainer>
         </NavContainer>
     );

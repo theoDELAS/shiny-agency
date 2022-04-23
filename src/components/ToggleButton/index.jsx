@@ -14,6 +14,8 @@ const ToggleContainer = styled.div`
     padding: 2px;
     height: 32px;
     position: relative;
+    align-selft: center;
+    margin: 10px 15px;
 `;
 
 const DialogButton = styled.div`
@@ -57,8 +59,8 @@ function ToggleButton() {
 }
 
 ToggleButton.propTypes = {
-    selected: PropTypes.bool.isRequired,
-    toggleSelected: PropTypes.func.isRequired,
+    selected: PropTypes.bool,
+    toggleSelected: PropTypes.func,
 };
 
 export default ToggleButton;
