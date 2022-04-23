@@ -1,43 +1,36 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Survey from "./pages/Survey";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Header from "./components/Header";
-import Error from "./components/Error";
 import Results from "./pages/Results";
 import Freelances from "./pages/Freelances";
-import { createGlobalStyle } from "styled-components";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Error from "./components/Error";
+import GlobalStyle from "./utils/styles/GlobalStyle";
+import { ThemeProvider, SurveyProvider } from "./utils/context";
 
-const GlobalStyle = createGlobalStyle`
-    div {
-        font-family: 'Trebuchet MS', Helvetica, sans-serif;
-    }
-`;
-
-ReactDOM.render(
-    <React.StrictMode>
-        <Router>
-            <GlobalStyle />
-            <Header />
-            <Switch>
-                <Route exact path="/">
-                    <Home />
-                </Route>
-                <Route path="/survey/:questionNumber">
-                    <Survey />
-                </Route>
-                <Route path="/profils">
-                    <Freelances />
-                </Route>
-                <Route path="/results">
-                    <Results />
-                </Route>
-                <Route>
-                    <Error />
-                </Route>
-            </Switch>
-        </Router>
-    </React.StrictMode>,
-    document.getElementById("root")
+const container = document.getElementById("root");
+const root = createRoot(container);
+root.render(
+    <BrowserRouter>
+        <ThemeProvider>
+            <SurveyProvider>
+                <GlobalStyle />
+                <Header />
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route
+                        path="/survey/:questionNumber"
+                        element={<Survey />}
+                    />
+                    <Route path="/results" element={<Results />} />
+                    <Route path="/freelances" element={<Freelances />} />
+                    <Route element={<Error />} />
+                </Routes>
+                <Footer />
+            </SurveyProvider>
+        </ThemeProvider>
+    </BrowserRouter>
 );
