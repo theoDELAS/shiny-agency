@@ -4,7 +4,7 @@ import colors from "../../utils/styles/colors";
 import { useTheme } from "../../utils/hooks";
 
 const CardLabel = styled.span`
-    color: ${({ theme }) => (theme === "light" ? colors.primary : "#ffffff")};
+    color: ${({ theme }) => (theme === "light" ? colors.primary : "#fff")};
     font-size: 22px;
     font-weight: normal;
     padding-left: 15px;

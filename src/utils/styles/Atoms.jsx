@@ -25,13 +25,16 @@ export const Loader = styled.div`
 export const StyledLink = styled(Link)`
     padding: 10px 15px;
     align-self: center;
-    color: #8186a0;
     text-decoration: none;
     font-size: 18px;
     text-align: center;
     ${(props) =>
+        props.$theme === "light"
+            ? `color: ${colors.secondary}; `
+            : `color: #fff;`}
+    ${(props) =>
         props.$isFullLink &&
         `color: white; 
-    border-radius: 30px; 
-    background-color: ${colors.primary};`}
+        border-radius: 30px; 
+        background-color: ${colors.primary};`}
 `;
